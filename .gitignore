@@ -42,6 +42,13 @@ build
 *.iws
 out
 .idea
+.idea/
+/.idea/
+/.idea/*.xml
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/modules.xml
+.idea/*.xml
 
 # Maven
 target
