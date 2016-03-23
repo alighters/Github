@@ -2,11 +2,11 @@
     package="com.lighters.github.data"
     >
 
-  <application
-      android:allowBackup="true"
-      android:supportsRtl="true"
-      >
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        >
 
-  </application>
+    </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.lighters.github.domain;
+package com.lighters.github;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
