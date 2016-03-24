@@ -49,6 +49,8 @@ public class RepoListActivity extends BaseActivity implements IRepoListView {
     @Inject
     RepoListAdapter mRepoListAdapter;
 
+    LinearLayoutManager mLayoutManager;
+
     @Override
     protected void initView() {
         setContentView(R.layout.activity_repo_list_layout);
@@ -71,9 +73,10 @@ public class RepoListActivity extends BaseActivity implements IRepoListView {
 
     @Override
     protected void initData() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        rvView.setLayoutManager(layoutManager);
+        mLayoutManager = new LinearLayoutManager(this);
+        rvView.setLayoutManager(mLayoutManager);
         rvView.setAdapter(mRepoListAdapter);
+        rvView.addOnScrollListener(mOnScrollListener);
         mPresenter.setView(this);
         mPresenter.loadData();
     }
@@ -83,4 +86,19 @@ public class RepoListActivity extends BaseActivity implements IRepoListView {
         mRepoListAdapter.setData(list);
         mRepoListAdapter.notifyDataSetChanged();
     }
+
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            int visibleItemCount = mLayoutManager.getChildCount();
+            int totalItemCount = mLayoutManager.getItemCount();
+            int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+
+            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                && firstVisibleItemPosition >= 0) {
+                mPresenter.loadMoreData();
+            }
+        }
+    };
 }

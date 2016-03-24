@@ -32,6 +32,8 @@ public interface ApiRepoService {
 
     @GET("/users/{username}/repos")
     Observable<List<RepoEntity>> getUsersRepos(
-        @Path("username") String username, @Query("page") int page
+        @Path("username") String username,
+        @Query("page") int page,
+        @Query("per_page") int pageSize
     );
 }

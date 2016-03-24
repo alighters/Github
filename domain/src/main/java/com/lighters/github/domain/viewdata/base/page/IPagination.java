@@ -14,35 +14,38 @@
  * limitations under the License.
  */
 
-package com.lighters.github.domain.viewdata.base;
-
-import rx.Observable;
+package com.lighters.github.domain.viewdata.base.page;
 
 /**
- * Created by david on 16/3/12.
+ * Created by david on 16/3/24.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public interface IViewData<T> {
+public interface IPagination {
 
     /**
-     * Get the data.
-     *
-     * @return the observable.
+     * Init the pagination.
      */
-    Observable<T> fetchData();
+    void initPage();
 
     /**
-     * Update the data.
-     *
-     * @return the observable.
+     * Load the next page data.
      */
-    Observable<T> updateData();
+    void loadNextPage();
 
     /**
-     * Delete the data.
+     * Get the page has more
      *
-     * @return the observable.
+     * @return whether the page has more data.
      */
-    Observable<T> deleteData();
+    boolean hasMorePage();
+
+    /**
+     * Set the result has more page.
+     *
+     * @param hasMorePage whether the page has more data.
+     */
+    void setHasMorePage(boolean hasMorePage);
+
+
 }

@@ -20,11 +20,9 @@ import android.util.Log;
 import com.lighters.github.common.di.PerActivity;
 import com.lighters.github.data.model.net.RepoEntity;
 import com.lighters.github.domain.viewdata.repo.RepoListViewData;
-import com.lighters.github.ui.base.IBaseView;
 import com.lighters.github.ui.base.IBasePresenter;
 import com.lighters.github.ui.repo.view.IRepoListView;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -43,6 +41,8 @@ public class RepoListPresenter implements IBasePresenter<IRepoListView> {
 
     IRepoListView mView;
 
+    private boolean mIsLoadingMore;
+
     @Inject
     public RepoListPresenter(RepoListViewData viewData) {
         mRepoListViewData = viewData;
@@ -55,7 +55,7 @@ public class RepoListPresenter implements IBasePresenter<IRepoListView> {
 
     public void loadData() {
         mRepoListViewData.mUserName = "david-wei";
-        mRepoListViewData.fetch().subscribeOn(Schedulers.io())
+        mRepoListViewData.fetchData().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Subscriber<List<RepoEntity>>() {
                 @Override
@@ -71,10 +71,21 @@ public class RepoListPresenter implements IBasePresenter<IRepoListView> {
                 @Override
                 public void onNext(List<RepoEntity> list) {
                     Log.d("test", "next");
-                    mView.renderRepoList(list);
+                    mView.renderRepoList(mRepoListViewData.mlist);
+                    mIsLoadingMore = false;
                 }
             });
     }
+
+    public void loadMoreData(){
+        if(!mIsLoadingMore) {
+            mIsLoadingMore = true;
+            mRepoListViewData.loadNextPage();
+            loadData();
+        }
+    }
+
+
 
     @Override
     public void resume() {

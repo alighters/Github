@@ -16,6 +16,7 @@
 
 package com.lighters.github.domain.viewdata.base;
 
+import com.lighters.github.domain.viewdata.base.page.PageIndexPagination;
 import javax.inject.Inject;
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -25,7 +26,7 @@ import rx.Observable;
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public class BaseViewData<T, F> implements IViewData<T>, IBuildService<F> {
+public class BaseViewData<T, F> extends PageIndexPagination implements IViewData<T>, IBuildService<F> {
 
     @Inject
     public Retrofit mRetrofit;
@@ -37,17 +38,22 @@ public class BaseViewData<T, F> implements IViewData<T>, IBuildService<F> {
     }
 
     @Override
-    public Observable<T> fetch() {
+    public Observable<T> fetchData() {
         return null;
     }
 
     @Override
-    public Observable<T> update() {
+    public Observable<T> updateData() {
         return null;
     }
 
     @Override
-    public Observable<T> delete() {
+    public Observable<T> deleteData() {
         return null;
+    }
+
+    @Override
+    public void loadNextPage() {
+        super.loadNextPage();
     }
 }
