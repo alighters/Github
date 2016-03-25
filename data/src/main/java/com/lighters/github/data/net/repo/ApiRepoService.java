@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lighters.github.data.net;
+package com.lighters.github.data.net.repo;
 
 import com.lighters.github.data.model.net.RepoEntity;
 import java.util.List;

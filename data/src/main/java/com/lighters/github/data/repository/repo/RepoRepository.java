@@ -14,34 +14,47 @@
  * limitations under the License.
  */
 
-package com.lighters.github.domain.viewdata.repo;
+package com.lighters.github.data.repository.repo;
 
+import com.lighters.github.data.DataRepository;
 import com.lighters.github.data.model.net.RepoEntity;
-import com.lighters.github.data.net.ApiServiceProxy;
-import com.lighters.github.data.net.repo.ApiRepoService;
-import com.lighters.github.domain.viewdata.base.BasePageIndexViewData;
 import java.util.List;
-import javax.inject.Inject;
 import rx.Observable;
 
 /**
- * Created by david on 16/3/12.
+ * Created by david on 16/3/24.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public class RepoListViewData extends BasePageIndexViewData<RepoEntity> {
+public class RepoRepository implements DataRepository<RepoEntity> {
 
-    public String mUserName;
-
-    private ApiRepoService mApiRepoService;
-
-    @Inject
-    public RepoListViewData(ApiServiceProxy<ApiRepoService> serviceProxy) {
-        mApiRepoService = serviceProxy.getProxy(ApiRepoService.class);
+    @Override
+    public Observable<RepoEntity> getByID(int id) {
+        return null;
     }
 
     @Override
-    protected Observable<List<RepoEntity>> fetchPageData() {
-        return mApiRepoService.getUsersRepos(mUserName, page, pageSize);
+    public Observable<RepoEntity> getByID(String id) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<RepoEntity>> getList() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<RepoEntity>> getList(String key) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<RepoEntity>> getList(String key1, String key2) {
+        return null;
+    }
+
+    @Override
+    public Observable<List<RepoEntity>> getList(String key1, String key2, String key3) {
+        return null;
     }
 }

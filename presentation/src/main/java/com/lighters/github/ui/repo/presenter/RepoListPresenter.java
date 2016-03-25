@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lighters.github.ui.repo.RepoListPresenter;
+package com.lighters.github.ui.repo.presenter;
 
 import android.util.Log;
 import com.lighters.github.common.di.PerActivity;
@@ -25,6 +25,7 @@ import com.lighters.github.ui.repo.view.IRepoListView;
 import java.util.List;
 import javax.inject.Inject;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -43,6 +44,8 @@ public class RepoListPresenter implements IBasePresenter<IRepoListView> {
 
     private boolean mIsLoadingMore;
 
+    private Subscription mSubscription;
+
     @Inject
     public RepoListPresenter(RepoListViewData viewData) {
         mRepoListViewData = viewData;
@@ -53,39 +56,31 @@ public class RepoListPresenter implements IBasePresenter<IRepoListView> {
         mView = dataView;
     }
 
-    public void loadData() {
-        mRepoListViewData.mUserName = "david-wei";
-        mRepoListViewData.fetchData().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Subscriber<List<RepoEntity>>() {
-                @Override
-                public void onCompleted() {
-                    Log.d("test", "complete");
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    Log.d("test", "error");
-                }
-
-                @Override
-                public void onNext(List<RepoEntity> list) {
-                    Log.d("test", "next");
-                    mView.renderRepoList(mRepoListViewData.mlist);
-                    mIsLoadingMore = false;
-                }
-            });
-    }
-
-    public void loadMoreData(){
-        if(!mIsLoadingMore) {
+    public void loadMoreData() {
+        if (!mIsLoadingMore && mRepoListViewData.hasMorePage()) {
             mIsLoadingMore = true;
-            mRepoListViewData.loadNextPage();
-            loadData();
+            mRepoListViewData.mUserName = "david-wei";
+            mSubscription = mRepoListViewData.loadNextPage().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<RepoEntity>>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d("test", "complete");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("test", "error");
+                    }
+
+                    @Override
+                    public void onNext(List<RepoEntity> list) {
+                        mView.renderRepoList(mRepoListViewData.getListData());
+                        mIsLoadingMore = false;
+                    }
+                });
         }
     }
-
-
 
     @Override
     public void resume() {
@@ -99,6 +94,8 @@ public class RepoListPresenter implements IBasePresenter<IRepoListView> {
 
     @Override
     public void destroy() {
-
+        if (mSubscription != null) {
+            mSubscription.unsubscribe();
+        }
     }
 }

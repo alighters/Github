@@ -23,7 +23,7 @@ import butterknife.Bind;
 import com.lighters.github.R;
 import com.lighters.github.data.model.net.RepoEntity;
 import com.lighters.github.ui.base.BaseActivity;
-import com.lighters.github.ui.repo.RepoListPresenter.RepoListPresenter;
+import com.lighters.github.ui.repo.presenter.RepoListPresenter;
 import com.lighters.github.ui.repo.adapter.RepoListAdapter;
 import com.lighters.github.ui.repo.component.DaggerRepoComponent;
 import com.lighters.github.ui.repo.component.RepoComponent;
@@ -50,6 +50,7 @@ public class RepoListActivity extends BaseActivity implements IRepoListView {
     RepoListAdapter mRepoListAdapter;
 
     LinearLayoutManager mLayoutManager;
+
 
     @Override
     protected void initView() {
@@ -78,7 +79,7 @@ public class RepoListActivity extends BaseActivity implements IRepoListView {
         rvView.setAdapter(mRepoListAdapter);
         rvView.addOnScrollListener(mOnScrollListener);
         mPresenter.setView(this);
-        mPresenter.loadData();
+        mPresenter.loadMoreData();
     }
 
     @Override

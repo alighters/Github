@@ -16,12 +16,16 @@
 
 package com.lighters.github.domain.viewdata.base.page;
 
+import com.lighters.github.domain.viewdata.base.IViewData;
+import java.util.List;
+import rx.Observable;
+
 /**
  * Created by david on 16/3/24.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public interface IPagination {
+public interface IPagination<T> extends IViewData<T>{
 
     /**
      * Init the pagination.
@@ -31,7 +35,7 @@ public interface IPagination {
     /**
      * Load the next page data.
      */
-    void loadNextPage();
+    Observable<List<T>> loadNextPage();
 
     /**
      * Get the page has more

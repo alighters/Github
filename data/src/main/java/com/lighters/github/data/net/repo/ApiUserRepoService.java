@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.lighters.github.domain.viewdata.base;
+package com.lighters.github.data.net.repo;
 
 /**
- * Created by david on 16/3/23.
+ * Created by david on 16/3/12.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public interface IBuildService<T> {
-    /**
-     * build the T model by the class of T.
-     *
-     * @param tClass class of T.
-     * @return T
-     */
-    T buildService(Class<T> tClass);
+public interface ApiUserRepoService {
+
 }

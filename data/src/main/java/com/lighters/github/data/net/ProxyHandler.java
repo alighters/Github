@@ -14,45 +14,34 @@
  * limitations under the License.
  */
 
-package com.lighters.github.domain.viewdata.base;
+package com.lighters.github.data.net;
 
-import com.lighters.github.domain.viewdata.base.page.IPagination;
-import java.util.List;
-import rx.Observable;
+import android.util.Log;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 /**
- * Created by david on 16/3/22.
+ * Created by david on 16/3/24.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public class BaseViewData<T> implements IViewData<T> {
+public class ProxyHandler implements InvocationHandler {
 
+    public static final String TAG = "Proxy";
 
+    private Object mObject;
 
-    @Override
-    public T getData() {
-        return null;
+    public ProxyHandler(Object obj) {
+        super();
+        this.mObject = obj;
     }
 
     @Override
-    public List<T> getListData() {
-        return null;
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        Object result = null;
+        Log.d(TAG, method.getName() + ":" + args.toString());
+        result = method.invoke(mObject, args);
+        Log.d(TAG, result.getClass() + ":" + result.toString());
+        return result;
     }
-
-    @Override
-    public Observable<T> fetchData() {
-        return null;
-    }
-
-    @Override
-    public Observable<T> updateData() {
-        return null;
-    }
-
-    @Override
-    public Observable<T> deleteData() {
-        return null;
-    }
-
-
 }

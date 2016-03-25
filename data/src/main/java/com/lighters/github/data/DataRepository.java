@@ -14,50 +14,59 @@
  * limitations under the License.
  */
 
-package com.lighters.github.domain.viewdata.base;
+package com.lighters.github.data;
 
 import java.util.List;
 import rx.Observable;
 
 /**
- * Created by david on 16/3/12.
+ * Created by david on 16/3/24.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public interface IViewData<T> {
+public interface DataRepository<T> {
 
     /**
-     * Get the data
      *
-     * @return the T data.
+     * @param id
+     * @return
      */
-    T getData();
+    Observable<T> getByID(int id);
 
     /**
-     * Get the list data.
      *
-     * @return the list T data.
+     * @param id
+     * @return
      */
-    List<T> getListData();
+    Observable<T> getByID(String id);
 
     /**
-     * Get the data.
      *
-     * @return the observable.
+     * @return
      */
-    Observable<T> fetchData();
+    Observable<List<T>> getList();
 
     /**
-     * Update the data.
      *
-     * @return the observable.
+     * @param key
+     * @return
      */
-    Observable<T> updateData();
+    Observable<List<T>> getList(String key);
 
     /**
-     * Delete the data.
      *
-     * @return the observable.
+     * @param key1
+     * @param key2
+     * @return
      */
-    Observable<T> deleteData();
+    Observable<List<T>> getList(String key1, String key2);
+
+    /**
+     *
+     * @param key1
+     * @param key2
+     * @param key3
+     * @return
+     */
+    Observable<List<T>> getList(String key1, String key2, String key3);
 }
