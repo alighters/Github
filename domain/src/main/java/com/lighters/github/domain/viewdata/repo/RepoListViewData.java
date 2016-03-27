@@ -41,7 +41,7 @@ public class RepoListViewData extends BasePageIndexViewData<RepoEntity> {
     }
 
     @Override
-    protected Observable<List<RepoEntity>> fetchPageData() {
+    protected Observable<List<RepoEntity>> fetchListData() {
         return mApiRepoService.getUsersRepos(mUserName, page, pageSize);
     }
 }

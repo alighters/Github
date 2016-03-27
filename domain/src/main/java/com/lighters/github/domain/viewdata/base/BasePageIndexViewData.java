@@ -44,7 +44,7 @@ public abstract class BasePageIndexViewData<T> implements IPagination<T> {
     @Override
     public Observable<List<T>> loadNextPage() {
         if (mHasMorePage) {
-            return fetchPageData().flatMap(new Func1<List<T>, Observable<List<T>>>() {
+            return fetchListData().flatMap(new Func1<List<T>, Observable<List<T>>>() {
                 @Override
                 public Observable<List<T>> call(List<T> ts) {
                     if (ts != null) {
@@ -69,10 +69,11 @@ public abstract class BasePageIndexViewData<T> implements IPagination<T> {
     }
 
     /**
+     * Fetch the list data. Child class must override the method.
      *
-     * @return
+     * @return the list data.
      */
-    protected abstract Observable<List<T>> fetchPageData();
+    protected abstract Observable<List<T>> fetchListData();
 
     @Override
     public boolean hasMorePage() {
