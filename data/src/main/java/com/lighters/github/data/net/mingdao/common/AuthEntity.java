@@ -17,15 +17,16 @@
 package com.lighters.github.data.net.mingdao.common;
 
 import android.text.TextUtils;
+import com.lighters.github.data.model.IsNull;
 
 /**
  * Created by david on 16/3/25.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public class AuthEntity {
+public class AuthEntity implements IsNull{
     /**
-     * access_token : D3KJ89YI4QYNJKA
+     * refreshToken : D3KJ89YI4QYNJKA
      * expires_in : 1234
      * refresh_token : C3KJ89YI4QYNJDD
      */
@@ -69,7 +70,7 @@ public class AuthEntity {
     @Override
     public String toString() {
         return "AuthEntity{" +
-            "access_token='" + access_token + '\'' +
+            "refreshToken='" + access_token + '\'' +
             ", expires_in='" + expires_in + '\'' +
             ", refresh_token='" + refresh_token + '\'' +
             ", sessionID='" + sessionID + '\'' +

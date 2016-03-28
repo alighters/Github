@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-package com.lighters.github.common.di;
-
-import javax.inject.Scope;
+package com.lighters.github.domain.di;
 
 /**
- * Created by david on 16/3/22.
- * Email: huangdiv5@gmail.com
- * GitHub: https://github.com/david-wei
+ * Interface representing a contract for clients that contains a component for dependency injection.
  */
-@Scope
-public @interface ActivityScopre {
+public interface HasComponent<C> {
+  C getComponent();
 }

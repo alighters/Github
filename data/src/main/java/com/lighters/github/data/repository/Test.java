@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
-package com.lighters.github.ui.repo.component;
+package com.lighters.github.data.repository;
 
-import com.lighters.github.common.di.component.ApplicationComponent;
-import com.lighters.github.common.di.module.ActivityModule;
-import com.lighters.github.domain.di.PerActivity;
-import com.lighters.github.ui.repo.RepoListActivity;
-import com.lighters.github.ui.repo.module.RepoModule;
-import dagger.Component;
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
- * Created by david on 16/3/23.
+ * Created by david on 16/3/28.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = { ActivityModule.class, RepoModule.class })
-public interface RepoComponent {
-    void inject(RepoListActivity repoListActivity);
+public class Test {
 
+    public static void main(String [] args){
+        //get().retryWhen(new Func1<Observable<? extends Throwable>, Observable<?>>() {
+        //    @Override
+        //    public Observable<?> call(Observable<? extends Throwable> observable) {
+        //        return new ;
+        //    }
+        //});
+    }
 
+    static Observable<String> get(){
+        return Observable.just("s");
+    }
 }

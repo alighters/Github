@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package com.lighters.github.common.di.commopents;
+package com.lighters.github.domain.di;
 
-import android.app.Activity;
-import com.lighters.github.common.di.PerActivity;
-import com.lighters.github.common.di.modules.ActivityModule;
-import dagger.Component;
+import java.lang.annotation.Retention;
+import javax.inject.Scope;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Created by david on 16/3/23.
- * Email: huangdiv5@gmail.com
- * GitHub: https://github.com/david-wei
+ * A scoping annotation to permit objects whose lifetime should
+ * conform to the life of the activity to be memorized in the
+ * correct component.
  */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
-public interface ActivityCompoent {
-    //Exposed to sub-graphs.
-    Activity activity();
-
-}
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {}

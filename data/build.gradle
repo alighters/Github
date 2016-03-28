@@ -51,6 +51,7 @@ dependencies {
 
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.dagger
+    compile dataDependencies.okhttpLogging
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitAdapterRxJava
     compile dataDependencies.gson

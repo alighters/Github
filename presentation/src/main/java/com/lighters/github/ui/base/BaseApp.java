@@ -19,9 +19,9 @@ package com.lighters.github.ui.base;
 import android.app.Application;
 import com.facebook.stetho.Stetho;
 import com.lighters.github.BuildConfig;
-import com.lighters.github.common.di.commopents.ApplicationComponent;
-import com.lighters.github.common.di.commopents.DaggerApplicationComponent;
-import com.lighters.github.common.di.modules.ApplicationModule;
+import com.lighters.github.common.di.component.ApplicationComponent;
+import com.lighters.github.common.di.component.DaggerApplicationComponent;
+import com.lighters.github.common.di.module.ApplicationModule;
 import com.squareup.leakcanary.LeakCanary;
 
 /**

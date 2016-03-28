@@ -13,18 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lighters.github.common.di;
 
-import java.lang.annotation.Retention;
-import javax.inject.Scope;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+package com.lighters.github.data.exception;
 
 /**
- * A scoping annotation to permit objects whose lifetime should
- * conform to the life of the activity to be memorized in the
- * correct component.
+ * API错误
+ *
+ * Created by yueban on 15:37 24/2/16.
+ * Email: fbzhh007@gmail.com
+ * QQ: 343278606
  */
-@Scope
-@Retention(RUNTIME)
-public @interface PerActivity {}
+public class APIException extends RuntimeException {
+    private ApiErrorModel mApiErrorModel;
+
+    public APIException() {
+        super();
+    }
+
+    public APIException(ApiErrorModel apiErrorModel) {
+        mApiErrorModel = apiErrorModel;
+    }
+
+    public ApiErrorModel getApiErrorModel() {
+        return mApiErrorModel;
+    }
+}

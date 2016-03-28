@@ -83,6 +83,7 @@ ext {
     dataDependencies = [
         daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
         dagger               : "com.google.dagger:dagger:${daggerVersion}",
+        okhttpLogging        : "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingVersion}",
         retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
         retrofitAdapterRxJava: "com.squareup.retrofit2:adapter-rxjava:${retrofitAdapterRxJavaVersion}",
         gson                 : "com.google.code.gson:gson:${gsonVersion}",

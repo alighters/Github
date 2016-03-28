@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package com.lighters.github.data.repository.login;
+package com.lighters.github.common.di.component;
 
-import com.lighters.github.data.net.mingdao.common.AuthEntity;
-import rx.Observable;
+import android.app.Activity;
+import com.lighters.github.common.di.module.ActivityModule;
+import com.lighters.github.domain.di.PerActivity;
+import dagger.Component;
 
 /**
- * Created by david on 16/3/27.
+ * Created by david on 16/3/23.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-public class LoginRepository {
-
-    Observable<AuthEntity> login(String name, String password){
-        return null;
-    }
-
-
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
+public interface ActivityCompoent {
+    //Exposed to sub-graphs.
+    Activity activity();
 
 }

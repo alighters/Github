@@ -18,9 +18,10 @@ package com.lighters.github.ui.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 import butterknife.ButterKnife;
-import com.lighters.github.common.di.commopents.ApplicationComponent;
-import com.lighters.github.common.di.modules.ActivityModule;
+import com.lighters.github.common.di.component.ApplicationComponent;
+import com.lighters.github.common.di.module.ActivityModule;
 import com.lighters.github.ui.App;
 
 /**
@@ -29,8 +30,6 @@ import com.lighters.github.ui.App;
  * GitHub: https://github.com/david-wei
  */
 public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,12 +47,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      */
     protected abstract void initView();
 
-
     /**
      * Init the injectors.
      */
     protected abstract void initInjector();
-
 
     /**
      * Init the listener.
@@ -64,10 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
      * Init the data.
      */
     protected abstract void initData();
-
-
-
-
 
     /**
      * Get the Main Application component for dependency injection.
@@ -105,6 +98,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

@@ -14,24 +14,37 @@
  * limitations under the License.
  */
 
-package com.lighters.github.ui.repo.component;
+package com.lighters.github.common.di.component;
 
-import com.lighters.github.common.di.component.ApplicationComponent;
-import com.lighters.github.common.di.module.ActivityModule;
-import com.lighters.github.domain.di.PerActivity;
-import com.lighters.github.ui.repo.RepoListActivity;
-import com.lighters.github.ui.repo.module.RepoModule;
+import android.content.Context;
+import com.lighters.github.common.di.module.ApplicationModule;
+import com.lighters.github.data.repository.TokenModule;
+import com.lighters.github.data.repository.login.LoginCache;
+import com.lighters.github.data.repository.login.TokenRepository;
+import com.lighters.github.ui.base.BaseActivity;
 import dagger.Component;
+import javax.inject.Singleton;
+import retrofit2.Retrofit;
 
 /**
  * Created by david on 16/3/23.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = { ActivityModule.class, RepoModule.class })
-public interface RepoComponent {
-    void inject(RepoListActivity repoListActivity);
+@Singleton
+@Component(modules = { ApplicationModule.class, TokenModule.class})
+public interface ApplicationComponent {
 
+    void inject(BaseActivity baseActivity);
+
+    //Exposed to sub-graphs.
+    Context context();
+
+    Retrofit retrofit();
+
+    LoginCache loginCache();
+
+
+    TokenRepository tokenRepository();
 
 }

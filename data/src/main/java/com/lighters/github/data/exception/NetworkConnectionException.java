@@ -14,32 +14,29 @@
  * limitations under the License.
  */
 
-package com.lighters.github.common.di.modules;
-
-import android.app.Activity;
-import com.lighters.github.common.di.PerActivity;
-import dagger.Module;
-import dagger.Provides;
+package com.lighters.github.data.exception;
 
 /**
- * Created by david on 16/3/23.
- * Email: huangdiv5@gmail.com
- * GitHub: https://github.com/david-wei
+ * 网络连接错误
+ *
+ * Created by yueban on 15:37 24/2/16.
+ * Email: fbzhh007@gmail.com
+ * QQ: 343278606
  */
-@Module
-public class ActivityModule {
-    private final Activity activity;
-
-    public ActivityModule(Activity activity) {
-        this.activity = activity;
+public class NetworkConnectionException extends Exception {
+    public NetworkConnectionException() {
+        super();
     }
 
-    /**
-     * Expose the activity to dependents in the graph.
-     */
-    @Provides
-    @PerActivity
-    public Activity activity() {
-        return this.activity;
+    public NetworkConnectionException(final String message) {
+        super(message);
+    }
+
+    public NetworkConnectionException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public NetworkConnectionException(final Throwable cause) {
+        super(cause);
     }
 }

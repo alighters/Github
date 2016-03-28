@@ -16,24 +16,28 @@
 
 package com.lighters.github.ui.login.presenter;
 
+import com.lighters.github.data.exception.APIException;
+import com.lighters.github.data.net.mingdao.common.AuthEntity;
+import com.lighters.github.domain.di.PerActivity;
 import com.lighters.github.domain.viewdata.login.LoginViewData;
-import com.lighters.github.domain.viewdata.repo.RepoListViewData;
 import com.lighters.github.ui.base.IBasePresenter;
 import com.lighters.github.ui.login.view.ILoginView;
-import com.lighters.github.ui.repo.view.IRepoListView;
 import javax.inject.Inject;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by david on 16/3/26.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
+@PerActivity
 public class LoginPresenter implements IBasePresenter<ILoginView> {
 
     LoginViewData mViewData;
 
     ILoginView mView;
-
 
     @Inject
     public LoginPresenter(LoginViewData viewData) {
@@ -58,5 +62,31 @@ public class LoginPresenter implements IBasePresenter<ILoginView> {
     @Override
     public void setView(ILoginView view) {
         mView = view;
+    }
+
+    public void login(String userName, String password) {
+        mViewData.login(userName, password)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Subscriber<AuthEntity>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    if (e instanceof APIException) {
+                        mView.showError(((APIException) e).getApiErrorModel().getError_msg());
+                    }else{
+                        mView.showError(e.toString());
+                    }
+                }
+
+                @Override
+                public void onNext(AuthEntity authEntity) {
+                    mView.showData(authEntity);
+                }
+            });
     }
 }

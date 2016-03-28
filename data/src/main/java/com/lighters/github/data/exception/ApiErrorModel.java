@@ -14,31 +14,30 @@
  * limitations under the License.
  */
 
-package com.lighters.github.common.di.commopents;
-
-import android.content.Context;
-import com.lighters.github.common.di.modules.ApplicationModule;
-import com.lighters.github.ui.base.BaseActivity;
-import dagger.Component;
-import javax.inject.Singleton;
-import retrofit2.Retrofit;
+package com.lighters.github.data.exception;
 
 /**
- * Created by david on 16/3/23.
- * Email: huangdiv5@gmail.com
- * GitHub: https://github.com/david-wei
+ * Created by yueban on 13:31 2/3/16.
+ * Email: fbzhh007@gmail.com
+ * QQ: 343278606
  */
-@Singleton
-@Component(modules = { ApplicationModule.class})
-public interface ApplicationComponent {
+public class ApiErrorModel {
+    private String error_code;
+    private String error_msg;
 
-    void inject(BaseActivity baseActivity);
+    public String getError_code() {
+        return error_code;
+    }
 
-    //Exposed to sub-graphs.
-    Context context();
+    public void setError_code(String error_code) {
+        this.error_code = error_code;
+    }
 
-    Retrofit retrofit();
+    public String getError_msg() {
+        return error_msg;
+    }
 
-
-
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
+    }
 }

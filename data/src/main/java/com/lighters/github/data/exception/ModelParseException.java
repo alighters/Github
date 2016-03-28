@@ -14,32 +14,29 @@
  * limitations under the License.
  */
 
-package com.lighters.github.data.net;
-
-import java.lang.reflect.Proxy;
-import javax.inject.Inject;
-import retrofit2.Retrofit;
+package com.lighters.github.data.exception;
 
 /**
- * Created by david on 16/3/24.
- * Email: huangdiv5@gmail.com
- * GitHub: https://github.com/david-wei
+ * API错误
+ *
+ * Created by yueban on 15:37 24/2/16.
+ * Email: fbzhh007@gmail.com
+ * QQ: 343278606
  */
-public class ApiServiceProxy<T> {
-
-    @Inject
-    public Retrofit mRetrofit;
-
-    @Inject
-    ProxyHandler mProxyHandler;
-
-    @Inject
-    public ApiServiceProxy() {
+public class ModelParseException extends RuntimeException {
+    public ModelParseException() {
+        super();
     }
 
-    public T getProxy(Class<T> tClass) {
-        T t = mRetrofit.create(tClass);
-        mProxyHandler.setObject(t);
-        return (T) Proxy.newProxyInstance(tClass.getClassLoader(), new Class<?>[] { tClass }, mProxyHandler);
+    public ModelParseException(final String message) {
+        super(message);
+    }
+
+    public ModelParseException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public ModelParseException(final Throwable cause) {
+        super(cause);
     }
 }

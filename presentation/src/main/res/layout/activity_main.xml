@@ -16,6 +16,7 @@
         android:id="@+id/et_login_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="david.wei@mingdao.com"
         android:hint="用户名"/>
 
     <EditText
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="www12345"
         android:hint="密码"
         />
 
@@ -33,5 +35,11 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
         android:text="登陆"/>
+
+    <TextView
+        android:id="@+id/tv_login_result"
+        android:layout_width="match_parent"
+        android:singleLine="false"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

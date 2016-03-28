@@ -13,11 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lighters.github.common.di;
+
+package com.lighters.github.data.repository;
+
+import com.lighters.github.data.repository.login.LoginCache;
+import com.lighters.github.data.repository.login.TokenRepository;
+import dagger.Module;
+import dagger.Provides;
+import retrofit2.Retrofit;
 
 /**
- * Interface representing a contract for clients that contains a component for dependency injection.
+ * Created by david on 16/3/28.
+ * Email: huangdiv5@gmail.com
+ * GitHub: https://github.com/david-wei
  */
-public interface HasComponent<C> {
-  C getComponent();
+@Module
+public class TokenModule {
+
+    //@Provides
+    //TokenRepository provideTokenRepository(Retrofit retrofit, LoginCache loginCache) {
+    //    return new TokenRepository(loginCache, retrofit);
+    //}
 }

@@ -34,7 +34,7 @@ public interface ApiPostService {
         @Query("page") int page,
         @Query("pagesize") int pageSize,
         @Query("keywords") String keywords,
-        @Query("access_token") String access_token
+        @Query("refreshToken") String access_token
     );
 
     /**

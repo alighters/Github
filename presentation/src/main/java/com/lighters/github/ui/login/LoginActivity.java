@@ -16,16 +16,24 @@
 
 package com.lighters.github.ui.login;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import butterknife.Bind;
 import com.lighters.github.R;
+import com.lighters.github.data.net.mingdao.common.AuthEntity;
 import com.lighters.github.ui.base.BaseActivity;
+import com.lighters.github.ui.login.component.DaggerLoginComponent;
+import com.lighters.github.ui.login.component.LoginComponent;
+import com.lighters.github.ui.login.presenter.LoginPresenter;
+import com.lighters.github.ui.login.view.ILoginView;
+import javax.inject.Inject;
 
 /**
  * The main mPage about the program.
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Bind(R.id.et_login_name)
     EditText mEditTextName;
@@ -33,7 +41,11 @@ public class LoginActivity extends BaseActivity {
     EditText mEditTextPwd;
     @Bind(R.id.bt_login_btn)
     Button mButtonLogin;
+    @Bind(R.id.tv_login_result)
+    TextView mTvLoginResult;
 
+    @Inject
+    LoginPresenter mPresenter;
 
     @Override
     protected void initView() {
@@ -42,16 +54,31 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initInjector() {
-
+        LoginComponent component = DaggerLoginComponent.builder()
+            .applicationComponent(getApplicationComponent())
+            .activityModule(getActivityModule())
+            .build();
+        component.inject(this);
     }
 
     @Override
     protected void initListener() {
-
+        mButtonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.login(mEditTextName.getText().toString(), mEditTextPwd.getText().toString());
+            }
+        });
     }
 
     @Override
     protected void initData() {
+        mPresenter.setView(this);
 
+    }
+
+    @Override
+    public void showData(AuthEntity authEntity) {
+        mTvLoginResult.setText(authEntity.toString());
     }
 }

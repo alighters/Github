@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-package com.lighters.github.ui.repo.component;
+package com.lighters.github.domain.di;
 
-import com.lighters.github.common.di.component.ApplicationComponent;
-import com.lighters.github.common.di.module.ActivityModule;
-import com.lighters.github.domain.di.PerActivity;
-import com.lighters.github.ui.repo.RepoListActivity;
-import com.lighters.github.ui.repo.module.RepoModule;
-import dagger.Component;
+import javax.inject.Scope;
 
 /**
- * Created by david on 16/3/23.
+ * Created by david on 16/3/22.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = { ActivityModule.class, RepoModule.class })
-public interface RepoComponent {
-    void inject(RepoListActivity repoListActivity);
-
-
+@Scope
+public @interface ActivityScopre {
 }

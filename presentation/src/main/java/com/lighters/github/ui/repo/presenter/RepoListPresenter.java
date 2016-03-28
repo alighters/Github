@@ -17,8 +17,8 @@
 package com.lighters.github.ui.repo.presenter;
 
 import android.util.Log;
-import com.lighters.github.common.di.PerActivity;
 import com.lighters.github.data.model.net.RepoEntity;
+import com.lighters.github.domain.di.PerActivity;
 import com.lighters.github.domain.viewdata.repo.RepoListViewData;
 import com.lighters.github.ui.base.IBasePresenter;
 import com.lighters.github.ui.repo.view.IRepoListView;

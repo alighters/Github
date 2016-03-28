@@ -14,24 +14,32 @@
  * limitations under the License.
  */
 
-package com.lighters.github.ui.repo.component;
+package com.lighters.github.common.di.module;
 
-import com.lighters.github.common.di.component.ApplicationComponent;
-import com.lighters.github.common.di.module.ActivityModule;
+import android.app.Activity;
 import com.lighters.github.domain.di.PerActivity;
-import com.lighters.github.ui.repo.RepoListActivity;
-import com.lighters.github.ui.repo.module.RepoModule;
-import dagger.Component;
+import dagger.Module;
+import dagger.Provides;
 
 /**
  * Created by david on 16/3/23.
  * Email: huangdiv5@gmail.com
  * GitHub: https://github.com/david-wei
  */
-@PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = { ActivityModule.class, RepoModule.class })
-public interface RepoComponent {
-    void inject(RepoListActivity repoListActivity);
+@Module
+public class ActivityModule {
+    private final Activity activity;
 
+    public ActivityModule(Activity activity) {
+        this.activity = activity;
+    }
 
+    /**
+     * Expose the activity to dependents in the graph.
+     */
+    @Provides
+    @PerActivity
+    public Activity activity() {
+        return this.activity;
+    }
 }

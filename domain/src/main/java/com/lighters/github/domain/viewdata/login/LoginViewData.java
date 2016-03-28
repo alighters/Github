@@ -17,7 +17,9 @@
 package com.lighters.github.domain.viewdata.login;
 
 import com.lighters.github.data.net.mingdao.common.AuthEntity;
+import com.lighters.github.data.repository.login.UserRepository;
 import com.lighters.github.domain.viewdata.base.BaseViewData;
+import javax.inject.Inject;
 import rx.Observable;
 
 /**
@@ -27,8 +29,14 @@ import rx.Observable;
  */
 public class LoginViewData extends BaseViewData<AuthEntity> {
 
-    @Override
-    public Observable<AuthEntity> fetchData() {
-        return super.fetchData();
+    private UserRepository mUserRepository;
+
+    @Inject
+    public LoginViewData(UserRepository userRepository) {
+        mUserRepository = userRepository;
+    }
+
+    public Observable<AuthEntity> login(String userName, String password) {
+        return mUserRepository.login(userName, password);
     }
 }

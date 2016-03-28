@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package com.lighters.github.common.di.modules;
+package com.lighters.github.common.di.module;
 
 import android.content.Context;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.lighters.github.BuildConfig;
+import com.lighters.github.data.net.converter.GsonConverterFactory;
+import com.lighters.github.data.net.mingdao.common.NetConstant;
+import com.lighters.github.data.repository.login.LoginCache;
+import com.lighters.github.data.repository.login.TokenRepository;
+import com.lighters.github.domain.BuildConfig;
 import com.lighters.github.ui.base.BaseApp;
 import dagger.Module;
 import dagger.Provides;
@@ -27,7 +31,7 @@ import javax.inject.Singleton;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
-import retrofit2.GsonConverterFactory;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
@@ -53,11 +57,11 @@ public class ApplicationModule {
     @Singleton
     @Provides
     Retrofit provideRetrofit() {
-        //HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        //logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-            //.addInterceptor(logging)
+            .addInterceptor(logging)
             .addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
@@ -84,10 +88,23 @@ public class ApplicationModule {
         }
 
         return new Retrofit.Builder()
-            .baseUrl("https://api.github.com")
+            //.baseUrl("https://api.github.com")
+            .baseUrl(NetConstant.API)
             .client(clientBuilder.build())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build();
+    }
+
+    @Singleton
+    @Provides
+    LoginCache provideLoginCache(){
+        return new LoginCache();
+    }
+
+    @Singleton
+    @Provides
+    TokenRepository provideTokenRepository(Retrofit retrofit, LoginCache loginCache) {
+        return new TokenRepository(loginCache, retrofit);
     }
 }
