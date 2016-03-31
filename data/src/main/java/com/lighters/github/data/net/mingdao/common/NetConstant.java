@@ -23,8 +23,6 @@ package com.lighters.github.data.net.mingdao.common;
  */
 public class NetConstant {
 
-    public static final String MD_APP_KEY = "1672939984";
-    public static final String MD_APP_SECRET = "af036026d51e425d9d17c6cae5d8465a";
     public static final String ERROR_CODE_TOKEN_INVALID = "10105";
     public static final String ERROR_CODE_WRONG_PASSWORD = "10104";
     public static final String ERROR_CODE_TOKEN_NOT_EXIST = "10101";
@@ -34,6 +32,6 @@ public class NetConstant {
 
     public static final String API_POST_MY = "/post/v2/my?format=json";
 
-    public static String API = "https://api2.mingdao.com";
+    //public static String API = "https://api2.mingdao.com";
 
 }
